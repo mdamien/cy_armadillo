@@ -48,6 +48,8 @@ cdef extern from "armadillo" namespace "arma" nogil:
         mat operator-(double) nogil
         mat operator+(double) nogil
         mat operator/(double) nogil
+        # input/output
+        mat save(char*)
         #etc
 
     cdef cppclass cube:
