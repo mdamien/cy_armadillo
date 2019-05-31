@@ -19,7 +19,7 @@ cdef extern from "armadillo" namespace "arma" nogil:
         int n_elem
         int n_slices
         int n_nonzero
-        # fuctions
+        # functions
         mat i() nogil #inverse
         mat t() nogil #transpose
         vec diag() nogil
@@ -49,7 +49,7 @@ cdef extern from "armadillo" namespace "arma" nogil:
         mat operator+(double) nogil
         mat operator/(double) nogil
         # input/output
-        mat save(char*)
+        bool save(char*)
         #etc
 
     cdef cppclass cube:
@@ -122,6 +122,34 @@ cdef extern from "armadillo" namespace "arma" nogil:
         double * memptr()
         void raw_print(char*) nogil
         void raw_print() nogil
+
+
+    cdef cppclass sp_mat:
+        sp_mat() nogil
+        sp_mat(int n_rows, int n_cols) nogil
+        # sp_mat(mat locations, mat values, int n_rows, int n_cols, bool sort_locations, bool check_for_zeros) nogil
+        #attributes
+        int n_rows
+        int n_cols
+        int n_elem
+        int n_slices
+        int n_nonzero
+        # functions
+        mat i() nogil #inverse
+        mat t() nogil #transpose
+        vec diag() nogil
+        vec diag(int) nogil
+        fill(double) nogil
+        void raw_print(char*) nogil
+        void raw_print() nogil
+        vec col(int) nogil
+        # operators
+        double& operator[](int) nogil
+        double& operator[](int,int) nogil
+        double& at(int,int) nogil
+        double& at(int) nogil
+        # input/output
+        bool save(char*)
 
     # Armadillo Linear Algebra tools
     cdef bool chol(mat R, mat X) nogil # preallocated result
